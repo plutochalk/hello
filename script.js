@@ -78,7 +78,7 @@ function moveSprite(dir) {
     });
 
     // Show arrow at end
-    if (spritePos >= 170) endArrow.style.display = '';
+    if (spritePos >= 160) endArrow.style.display = '';
     else endArrow.style.display = 'none';
 
     if (progress < 1) {
