@@ -103,7 +103,7 @@ document.addEventListener('keydown', (e) => {
 document.getElementById('left-btn').onclick = () => moveSprite('left');
 document.getElementById('right-btn').onclick = () => moveSprite('right');
 
-// End arrow
+// End arrow click
 endArrow.onclick = () => {
   // Hide images
   images.forEach(img => document.getElementById(img.id).style.display = 'none');
