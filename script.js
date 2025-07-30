@@ -50,7 +50,7 @@ function moveSprite(dir) {
   sprite2.style.bottom = sprite.style.bottom;
 
   let start = spritePos;
-  let delta = (dir === 'right' ? 13 : -13); // vw units, adjust for speed
+  let delta = (dir === 'right' ? 5 : -5); // vw units, adjust for speed
   let end = Math.max(0, Math.min(180, start + delta));
   let startTime = null;
 
