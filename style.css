@@ -5,127 +5,127 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
+  font-size: 3vw; /* Responsive font */
 }
+
 #game-screen {
   position: relative;
-  /* Responsive: full width minus 50px (25px on each side) */
-  width: calc(100vw - 50px);
-  /* Responsive: half of viewport height */
-  height: 50vh;
-  /* Place 25px from the top, left, and right */
-  margin-top: 25px;
-  margin-left: 25px;
-  margin-right: 25px;
-  /* Remove fixed width/height */
+  width: 95vw;
+  max-width: 1200px;
+  height: 60vw;
+  max-height: 600px;
+  margin: 2vw auto 0 auto;
   background: black;
   border: 3px solid white;
   overflow: hidden;
-  /* No margin-bottom, screen only covers half from the top */
-  /* max-width: 1200px; *//* Optional: limit max width for huge screens */
   box-sizing: border-box;
 }
+
 #dialogue {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  /* Responsive dialogue width: fill most of screen, but leave some padding */
-  width: calc(100% - 20px);
-  min-height: 100px;
+  top: 2vw;
+  left: 2vw;
+  width: calc(100% - 4vw);
+  min-height: 8vw;
   color: white;
   font-family: monospace;
   background: rgba(0,0,0,0.6);
-  padding: 6px 12px;
-  border-radius: 12px;
+  padding: 2vw 3vw;
+  border-radius: 2vw;
   z-index: 10;
+  font-size: 3vw;
   box-sizing: border-box;
 }
+
 #map {
   position: absolute;
   left: 0; top: 0;
-  /* Map is 3x as wide as game screen for scrolling, but responsive */
-  width: calc(3 * 100%);
+  width: 300vw; /* Responsive */
   height: 100%;
   transition: left 0.12s cubic-bezier(.8,0,.2,1);
 }
+
 .floor {
   position: absolute;
-  left: 0; bottom: 24px;
+  left: 0; bottom: 8vw;
   width: 100%;
-  height: 3px;
+  height: 0.5vw;
   background: white;
-  border-radius: 2px;
+  border-radius: 0.5vw;
 }
-#sprite {
+
+#sprite, #sprite2 {
   position: absolute;
-  bottom: 30px;
-  left: 50px;
-  width: 48px;
-  height: 48px;
+  bottom: 10vw;
+  left: 4vw;
+  width: 6vw;
+  height: 6vw;
+  max-width: 70px;
+  max-height: 70px;
   transition: left 0.12s;
+  z-index: 3;
 }
+
 .info {
   position: absolute;
-  bottom: 50px;
-  width: 100px;
-  height: 100px;
-  filter: blur(8px) grayscale(0.7);
+  bottom: 10vw;
+  width: 8vw;
+  height: 8vw;
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 80px;
+  max-height: 80px;
+  filter: blur(10px) grayscale(0.7);
   transition: filter 0.5s;
 }
-/* Adjust info positions relative to the new responsive width */
-#info1 { left: 15%; }
-#info2 { left: 35%; }
-#info3 { left: 60%; }
-#info4 { left: 85%; }
-#info5 { left: 98%; }
+
+#info1 { left: 15vw; }
+#info2 { left: 45vw; }
+#info3 { left: 80vw; }
+#info4 { left: 120vw; }
+#info5 { left: 170vw; }
 
 #end-arrow {
   position: absolute;
-  bottom: 50px;
-  left: 97%;
-  font-size: 2em;
+  bottom: 14vw;
+  left: 295vw;
+  font-size: 4vw;
   background: white;
   color: black;
   border: none;
   border-radius: 50%;
-  padding: 8px 16px;
+  padding: 1vw 2vw;
   cursor: pointer;
   z-index: 5;
+  display: none;
   transform: translateX(-100%);
 }
 
 #mobile-controls {
-  display: none;
-  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3vw;
 }
+
 #mobile-controls img {
-  width: 48px;
-  height: 48px;
-  margin: 0 24px;
+  width: 8vw;
+  height: 8vw;
+  min-width: 40px;
+  min-height: 40px;
+  margin: 0 6vw;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 2vw;
   cursor: pointer;
 }
 
-@media (max-width: 500px) {
-  #game-screen {
-    width: calc(100vw - 20px);
-    min-width: 140px;
-    min-height: 80px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    height: 48vw;
-    max-width: 99vw;
-    max-height: 55vw;
-  }
-  #dialogue {
-    width: calc(100% - 12px);
-    left: 6px;
-    top: 6px;
-    padding: 4px 8px;
-  }
-  #mobile-controls {
-    display: flex;
-    justify-content: center;
-  }
-  }
+/* Make sure everything is still visible at smallest widths */
+@media (max-width: 600px) {
+  body { font-size: 5vw; }
+  #game-screen { height: 70vw; }
+  .info, #sprite, #sprite2 { min-width: 32px; min-height: 32px; }
+}
+
+@media (max-width: 400px) {
+  #game-screen { height: 90vw; }
+}
