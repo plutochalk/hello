@@ -8,18 +8,28 @@ body {
 }
 #game-screen {
   position: relative;
-  width: 400px;
-  height: 220px;
+  /* Responsive: full width minus 50px (25px on each side) */
+  width: calc(100vw - 50px);
+  /* Responsive: half of viewport height */
+  height: 50vh;
+  /* Place 25px from the top, left, and right */
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  /* Remove fixed width/height */
   background: black;
   border: 3px solid white;
   overflow: hidden;
-  margin-top: 40px;
+  /* No margin-bottom, screen only covers half from the top */
+  /* max-width: 1200px; *//* Optional: limit max width for huge screens */
+  box-sizing: border-box;
 }
 #dialogue {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 380px;
+  /* Responsive dialogue width: fill most of screen, but leave some padding */
+  width: calc(100% - 20px);
   min-height: 32px;
   color: white;
   font-family: monospace;
@@ -27,11 +37,13 @@ body {
   padding: 6px 12px;
   border-radius: 12px;
   z-index: 10;
+  box-sizing: border-box;
 }
 #map {
   position: absolute;
   left: 0; top: 0;
-  width: 1200px; /* Wider than viewport */
+  /* Map is 3x as wide as game screen for scrolling, but responsive */
+  width: calc(3 * 100%);
   height: 100%;
   transition: left 0.12s cubic-bezier(.8,0,.2,1);
 }
@@ -59,16 +71,17 @@ body {
   filter: blur(8px) grayscale(0.7);
   transition: filter 0.5s;
 }
-#info1 { left: 150px; }
-#info2 { left: 350px; }
-#info3 { left: 600px; }
-#info4 { left: 850px; }
-#info5 { left: 1050px; }
+/* Adjust info positions relative to the new responsive width */
+#info1 { left: 15%; }
+#info2 { left: 35%; }
+#info3 { left: 60%; }
+#info4 { left: 85%; }
+#info5 { left: 98%; }
 
 #end-arrow {
   position: absolute;
   bottom: 50px;
-  left: 1130px;
+  left: 97%;
   font-size: 2em;
   background: white;
   color: black;
@@ -77,6 +90,7 @@ body {
   padding: 8px 16px;
   cursor: pointer;
   z-index: 5;
+  transform: translateX(-100%);
 }
 
 #mobile-controls {
@@ -94,15 +108,24 @@ body {
 
 @media (max-width: 500px) {
   #game-screen {
-    width: 95vw;
+    width: calc(100vw - 20px);
+    min-width: 140px;
+    min-height: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
     height: 48vw;
     max-width: 99vw;
     max-height: 55vw;
-    min-width: 280px;
-    min-height: 120px;
+  }
+  #dialogue {
+    width: calc(100% - 12px);
+    left: 6px;
+    top: 6px;
+    padding: 4px 8px;
   }
   #mobile-controls {
     display: flex;
     justify-content: center;
   }
-}
+  }
