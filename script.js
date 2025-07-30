@@ -1,7 +1,7 @@
 // Game state
 const dialogueTexts = [
-  "Welcome! I'm sprite1, and this is my world. Let's explore together!",
-  "Thanks for checking out my about page! Find me here: <a href='https://social.example/' target='_blank'>My Social</a>"
+  "Hello, traveler. You seem to be... far away from the center of the internet, eh? No problem. just take a look around..",
+  "Going already? Well, best of luck, traveler. contact me if you want. <a href='https://social.example/' target='_blank'>My Social</a>"
 ];
 let dialogueIndex = 0;
 let dialogueDone = false;
