@@ -56,7 +56,7 @@ function moveSprite(dir) {
 
   function animateStep(ts) {
     if (!startTime) startTime = ts;
-    let progress = Math.min(1, (ts - startTime) / 200); // 200ms move
+    let progress = Math.min(1, (ts - startTime) / 40); // 40ms move
     spritePos = start + (end - start) * progress;
     let px = spritePos + 'vw';
     sprite2.style.left = px;
