@@ -30,7 +30,7 @@ body {
   left: 10px;
   /* Responsive dialogue width: fill most of screen, but leave some padding */
   width: calc(100% - 20px);
-  min-height: 32px;
+  min-height: 100px;
   color: white;
   font-family: monospace;
   background: rgba(0,0,0,0.6);
@@ -66,8 +66,8 @@ body {
 .info {
   position: absolute;
   bottom: 50px;
-  width: 64px;
-  height: 64px;
+  width: 100px;
+  height: 100px;
   filter: blur(8px) grayscale(0.7);
   transition: filter 0.5s;
 }
