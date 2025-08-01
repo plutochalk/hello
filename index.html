@@ -1,31 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>unknown digital space</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Character</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    :root {
+      --line-color: black;
+      --bg: white;
+    }
+
+    @media (prefers-color-scheme: dark) {
+  :root {
+    --line-color: white;
+    --bg: black;
+  }
+
+  .character {
+    filter: invert(1);
+  }
+
+    .line {
+      position: relative;
+      width: 100%;
+      height: 4px;
+      background-color: var(--line-color);
+    }
+
+    .character {
+  position: absolute;
+  top: -120px;
+  /* Remove left: 50% and transform: translateX(-50%) */
+  width: min(25vw, 150px);
+  height: auto;
+  transition: left 0.2s ease, transform 0.2s ease;
+    }
+  </style>
 </head>
 <body>
-  <div id="game-screen">
-    <div id="dialogue"></div>
-    <div id="map">
-      <div class="floor"></div>
-      <img id="sprite" src="assets/sprite1.png" alt="sprite">
-      <img id="sprite2" src="assets/sprite2.gif" alt="sprite2" style="display:none;">
-      <img class="info" id="info1" src="assets/info1.png" alt="info1">
-      <img class="info" id="info2" src="assets/info2.png" alt="info2">
-      <img class="info" id="info3" src="assets/info3.png" alt="info3">
-      <img class="info" id="info4" src="assets/info4.png" alt="info4">
-      <img class="info" id="info5" src="assets/info5.png" alt="info5">
-      <!-- Update: End arrow is now an image instead of a button -->
-      <img id="end-arrow" src="assets/end-arrow.png" alt="End" style="display:none;">
-    </div>
+
+  <div class="line">
+    <img src="idle.gif" alt="Character" class="character" id="character" />
   </div>
-  <div id="mobile-controls">
-    <img id="left-btn" src="assets/left-arrow.png" alt="Left">
-    <img id="right-btn" src="assets/right-arrow.png" alt="Right">
-  </div>
-  <script src="script.js"></script>
-</body>
-</html>
+
+  <script>
+  const character = document.getElementById('character');
+  const line = document.querySelector('.line');
+
+  // GIFs
+  const idleGif = 'idle.gif';
+  const walkGif = 'walk.gif';
+
+  // State
+  let position = 50; // Start at center (%)
+  let isWalking = false;
+
+  function updateCharacter(direction) {
+    character.src = walkGif;
+    isWalking = true;
+
+    if (direction === 'left') {
+      character.classList.add('flipped');
+      position = Math.max(0, position - 5); // Move left, min 0%
+    } else if (direction === 'right') {
+      character.classList.remove('flipped');
+      position = Math.min(100, position + 5); // Move right, max 100%
+    }
+
+    character.style.left = `${position}%`;
+
+    clearTimeout(character.resetTimeout);
+    character.resetTimeout = setTimeout(() => {
+      character.src = idleGif;
+      isWalking = false;
+    }, 500);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (isWalking) return; // Prevent spamming keydown
+    if (e.key === 'a' || e.key === 'ArrowLeft') {
+      updateCharacter('left');
+    } else if (e.key === 's' || e.key === 'ArrowRight') {
+      updateCharacter('right');
+    }
+  });
+  </script>
